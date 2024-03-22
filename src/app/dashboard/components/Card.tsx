@@ -61,7 +61,7 @@ const Card = ({
         onClose={() => setIsWithdrawModalOpen(false)}
       />
       <figure>
-        <img src={imageUrl} alt="card" className="h-[200px] w-full" />
+        <img src={imageUrl} alt="card" className="h-[240px] w-full" />
       </figure>
       <div className="card-body">
         <StatsSm>
