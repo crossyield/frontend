@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Stats from "./components/Stats";
 import Card from "./components/Card";
 import { useContractRead, useContractWrite } from "@thirdweb-dev/react";
@@ -6,7 +6,6 @@ import { useContractRead, useContractWrite } from "@thirdweb-dev/react";
 import DisclaimerModal from "./components/DisclamerModal";
 
 export default function Dashboard() {
-
   return (
     <main className="flex flex-col items-center justify-between p-12">
       <DisclaimerModal
@@ -28,7 +27,7 @@ export default function Dashboard() {
         <Card
           title="WETH"
           description="Deposit your assets into the vaults"
-          imageUrl="/weth.jpeg"
+          imageUrl="/vault.png"
           statsTitle="Current Projected Yield"
           statsValue="15%"
         />
