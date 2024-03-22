@@ -83,12 +83,12 @@ const Card = ({
           >
             Borrow
           </button>
-          <button
+          {/* <button
             onClick={handleOpenWithdrawModal}
             className="btn btn-primary hover:bg-white hover:border-white rounded-xl w-72 lg:w-48"
           >
             Withdraw
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
