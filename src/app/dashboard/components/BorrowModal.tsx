@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { toggleBackgroundBlur } from "../../../lib/utils";
 
 type ModalProps = {
   title: string;
@@ -10,6 +11,7 @@ type ModalProps = {
 const BorrowModal = ({ title, isOpen, onClose }: ModalProps) => {
   const handleModalClose = () => {
     onClose();
+    toggleBackgroundBlur(false); // Remove blur when modal closes
   };
 
   return (
