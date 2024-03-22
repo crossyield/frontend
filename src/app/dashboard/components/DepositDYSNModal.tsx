@@ -1,6 +1,9 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { toggleBackgroundBlur } from "../../../lib/utils";
+import { useVault } from "@/components/ContractInteraction";
+import { useContractRead, useContractWrite } from "@thirdweb-dev/react";
+import { BigNumber } from "ethers";
 
 type ModalProps = {
   title: string;
@@ -8,8 +11,8 @@ type ModalProps = {
   onClose: () => void;
 };
 
-const WithdrawModal = ({ title, isOpen, onClose }: ModalProps) => {
-  const handleWithdrawModalClose = () => {
+const DepositDYSNModal = ({ title, isOpen, onClose }: ModalProps) => {
+  const handleDepositDYSNModalClose = () => {
     onClose();
     toggleBackgroundBlur(false); // Remove blur when modal closes
   };
@@ -37,8 +40,8 @@ const WithdrawModal = ({ title, isOpen, onClose }: ModalProps) => {
                   className="input input-bordered w-full lg:max-w-lg rounded-xl"
                 />
                 <div className="label">
-                  <span className="label-text-alt">$0.00</span>
-                  <span className="label-text-alt">Balance:</span>
+                  <span className="label-text-alt">${}</span>
+                  <span className="label-text-alt">Balance: {}</span>
                 </div>
               </label>
             </div>
@@ -46,29 +49,24 @@ const WithdrawModal = ({ title, isOpen, onClose }: ModalProps) => {
             <h1 className="font-bold mt-4">Transaction Details</h1>
             <div className="my-10 md:max-w-lg">
               <div className="label">
-                <span className="label-text-alt">
-                  🪙 Total Withdrawable Amount
-                </span>
+                <span className="label-text-alt">🪙 APR</span>
                 <span className="label-text-alt">0</span>
               </div>
               <div className="label">
                 <span className="label-text-alt">⛽ Transaction fees</span>
-                <span className="label-text-alt">-</span>
+                <span className="label-text-alt">{}</span>
               </div>
             </div>
 
             <div className="modal-action flex flex-col items-center justify-center my-2 gap-2">
-              <button
-                // add deposit function to the onClick event
-                className="btn btn-primary rounded-xl w-48 hover:bg-white hover:border-white"
-              >
-                Withdraw
+              <button className="btn btn-primary rounded-xl w-48 hover:bg-white hover:border-white">
+                Deposit
               </button>
             </div>
             <div className="modal-action flex flex-col items-center justify-center my-2 gap-2">
               <form method="dialog">
                 <button
-                  onClick={handleWithdrawModalClose}
+                  onClick={handleDepositDYSNModalClose}
                   className="btn btn-outline btn-error rounded-xl w-48"
                 >
                   Close
@@ -82,4 +80,4 @@ const WithdrawModal = ({ title, isOpen, onClose }: ModalProps) => {
   );
 };
 
-export default WithdrawModal;
+export default DepositDYSNModal;

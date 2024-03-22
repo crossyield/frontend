@@ -11,3 +11,8 @@
 .blur-background {
   filter: blur(50px); /* Adjust the blur intensity as needed */
 }
+
+/* hide scrollbar */
+::-webkit-scrollbar {
+  display: none;
+}

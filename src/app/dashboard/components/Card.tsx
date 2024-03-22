@@ -3,9 +3,9 @@
 import React, { useState } from "react";
 import { StatSm, StatsSm } from "./Stats_sm";
 import { toggleBackgroundBlur } from "@/lib/utils";
-import DepositModal from "@/app/dashboard/components/DepositModal";
+import DepositDYSNModal from "@/app/dashboard/components/DepositDYSNModal";
 import BorrowModal from "@/app/dashboard/components/BorrowModal";
-import WithdrawModal from "./WithdrawModal";
+import DepositUSDCModal from "./DepositUSDCModal";
 
 type CardProps = {
   title: string;
@@ -22,43 +22,41 @@ const Card = ({
   statsTitle,
   statsValue,
 }: CardProps) => {
-  const [isDepositModalOpen, setIsDepositModalOpen] = useState(false);
-
+  const [isDepositDYSNModalOpen, setIsDepositDYSNModalOpen] = useState(false);
+  const [isDepositUSDCModalOpen, setIsDepositUSDCModalOpen] = useState(false);
   const [isBorrowModalOpen, setIsBorrowModalOpen] = useState(false);
 
-  const [isWithdrawModalOpen, setIsWithdrawModalOpen] = useState(false);
-
-  const handleOpenDepositModal = () => {
-    setIsDepositModalOpen(true);
-    toggleBackgroundBlur(true); // Blur the background
+  const handleOpenDepositDYSNModal = () => {
+    setIsDepositDYSNModalOpen(true);
+    toggleBackgroundBlur(true);
   };
 
   const handleOpenBorrowModal = () => {
     setIsBorrowModalOpen(true);
-    toggleBackgroundBlur(true); // Blur the background
+    toggleBackgroundBlur(true);
   };
 
-  const handleOpenWithdrawModal = () => {
-    setIsWithdrawModalOpen(true);
-    toggleBackgroundBlur(true); // Blur the background
+  const handleOpenDepositUSDCModal = () => {
+    setIsDepositUSDCModalOpen(true);
+    toggleBackgroundBlur(true);
   };
 
   return (
     <div className="card w-96 border border-slate-500 rounded-xl hover:shadow-[0_35px_60px_-15px_rgba(20,241,149,0.3)]">
-      <DepositModal
-        title="Deposit"
-        isOpen={isDepositModalOpen}
-        onClose={() => setIsDepositModalOpen(false)}
+      <DepositDYSNModal
+        title="Deposit DYSN"
+        isOpen={isDepositDYSNModalOpen}
+        onClose={() => setIsDepositDYSNModalOpen(false)}
+      />
+      <DepositUSDCModal
+        title="Deposit USDC"
+        isOpen={isDepositUSDCModalOpen}
+        onClose={() => setIsDepositUSDCModalOpen(false)}
       />
       <BorrowModal
-        title="Borrow Loan"
+        title="Borrow Self-Repaying Loan"
         isOpen={isBorrowModalOpen}
         onClose={() => setIsBorrowModalOpen(false)}
-      />
-      <WithdrawModal
-        title="Withdraw"
-        isOpen={isWithdrawModalOpen}
-        onClose={() => setIsWithdrawModalOpen(false)}
       />
       <figure>
         <img src={imageUrl} alt="card" className="h-[240px] w-full" />
@@ -71,24 +69,24 @@ const Card = ({
         <p>{description}</p>
         <div className="card-actions justify-center mt-4">
           <button
-            onClick={handleOpenDepositModal}
+            onClick={handleOpenDepositDYSNModal}
             className="btn btn-outline btn-success hover:bg-white hover:border-white rounded-xl w-72 lg:w-48"
           >
-            Deposit
+            Deposit DYSN
           </button>
 
+          <button
+            onClick={handleOpenDepositUSDCModal}
+            className="btn btn-outline btn-success hover:bg-white hover:border-white rounded-xl w-72 lg:w-48"
+          >
+            Deposit USDC
+          </button>
           <button
             onClick={handleOpenBorrowModal}
             className="btn btn-primary hover:bg-white hover:border-white rounded-xl w-72 lg:w-48"
           >
             Borrow
           </button>
-          {/* <button
-            onClick={handleOpenWithdrawModal}
-            className="btn btn-primary hover:bg-white hover:border-white rounded-xl w-72 lg:w-48"
-          >
-            Withdraw
-          </button> */}
         </div>
       </div>
     </div>

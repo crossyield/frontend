@@ -31,16 +31,6 @@ export default function Dashboard() {
           statsTitle="Current Projected Yield"
           statsValue="15%"
         />
-        {/* CC YUDHISH & YEECHIAN: Can add another strategy here, just uncomment the component below */}
-        {/* <Card
-          title="DAI"
-          description="Deposit your assets into the vaults"
-          imageUrl="/dai.jpeg"
-          buttonLabel="View Information"
-          statsTitle="Current Projected Yield"
-          statsValue="6%"
-          url="/vaults"
-        /> */}
       </div>
     </main>
   );
