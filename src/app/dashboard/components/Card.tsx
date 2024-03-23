@@ -5,7 +5,6 @@ import { StatSm, StatsSm } from "./Stats_sm";
 import { toggleBackgroundBlur } from "@/lib/utils";
 import DepositModal from "@/app/dashboard/components/DepositModal";
 import BorrowModal from "@/app/dashboard/components/BorrowModal";
-import WithdrawModal from "./WithdrawModal";
 
 type CardProps = {
   title: string;
