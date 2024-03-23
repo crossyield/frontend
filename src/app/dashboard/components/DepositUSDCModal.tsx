@@ -78,3 +78,4 @@ const DepositUSDCModal = ({ title, isOpen, onClose }: ModalProps) => {
 };
 
 export default DepositUSDCModal;
+
