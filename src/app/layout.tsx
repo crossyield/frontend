@@ -12,10 +12,10 @@ import {
 } from "../components/ThirdwebProvider";
 import {
   LineaTestnet,
-  Mumbai,
-  OptimismGoerli,
   ScrollSepoliaTestnet,
   ThundercoreTestnet,
+  OpSepoliaTestnet,
+  PolygonZkevmCardonaTestnet,
 } from "@thirdweb-dev/chains";
 import Header from "@/components/Header";
 import { Bounce, ToastContainer, toast } from "react-toastify";
@@ -45,10 +45,10 @@ export default function RootLayout({
         <ThirdwebProvider
           supportedChains={[
             LineaTestnet,
-            Mumbai,
-            OptimismGoerli,
             ScrollSepoliaTestnet,
+            PolygonZkevmCardonaTestnet,
             ThundercoreTestnet,
+            OpSepoliaTestnet,
           ]}
           theme={"dark"}
           clientId={process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID}

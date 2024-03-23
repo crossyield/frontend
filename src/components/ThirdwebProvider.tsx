@@ -12,7 +12,7 @@ import {
 } from "@thirdweb-dev/react";
 
 const smartWalletOptions: SmartWalletConfigOptions = {
-  factoryAddress: "0x9ae32F0650c658520b87416955940ED4aC22FDC7",
+  factoryAddress: "0xE486cBceB74D3540f7b80Bd3E5E3fB277941237f",
   gasless: true,
 };
 
