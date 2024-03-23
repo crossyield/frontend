@@ -13,8 +13,29 @@ type ModalProps = {
 };
 
 const DepositModal = ({ title, isOpen, onClose }: ModalProps) => {
+// contract interaction
+    const {contract: Vault} = useVault();
 
-
+    const [depositValue, setDepositValue] = useState(0);
+    const { 
+        mutateAsync: depositAmount , 
+        isLoading: loadingdepositAmount, 
+        error: depositAmountError,
+    } = useContractWrite(Vault, "_deposit");
+    
+    const handleDeposit = async () => {
+        if(depositValue > 0) {
+            try {
+                await depositAmount({args: [depositValue]});
+                // Optionally, reset depositValue to 0 or handle success
+                setDepositValue(0);
+                console.log('Deposit successful');
+            } catch (error) {
+                // Handle error
+                console.error('Deposit error:', error);
+            }
+        }
+    };
 
     const handleModalClose = () => {
     onClose();
@@ -42,6 +63,7 @@ const DepositModal = ({ title, isOpen, onClose }: ModalProps) => {
                     type="number"
                     placeholder="🪙 0.1"
                     className="input input-bordered w-full lg:max-w-lg rounded-xl"
+                    value={depositValue}
                 />
                 <div className="label">
                     <span className="label-text-alt">${}</span>
@@ -65,7 +87,7 @@ const DepositModal = ({ title, isOpen, onClose }: ModalProps) => {
             <div className="modal-action flex flex-col items-center justify-center my-2 gap-2">
                 <button
                 className="btn btn-primary rounded-xl w-48 hover:bg-white hover:border-white"
-
+                onClick={handleDeposit}
                 >
                 Deposit
                 </button>
