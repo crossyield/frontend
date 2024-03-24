@@ -53,8 +53,8 @@ const main = async() => {
     console.log('ApproveTxReceipt: ', approveTxReceipt)
 
     // STEP 2: Burn USDC
-    const burnTxGas = await ethTokenMessengerContract.methods.depositForBurn(amount, AVAX_DESTINATION_DOMAIN, destinationAddressInBytes32, USDC_ETH_CONTRACT_ADDRESS).estimateGas();
-    const burnTx = await ethTokenMessengerContract.methods.depositForBurn(amount, AVAX_DESTINATION_DOMAIN, destinationAddressInBytes32, USDC_ETH_CONTRACT_ADDRESS).send({gas: burnTxGas});
+    const burnTxGas = await ethTokenMessengerContract.methods.depositForBurn(amount, AVAX_DESTINATION_DOMAIN, destinationAddressInBytes32, USDC_OP_CONTRACT_ADDRESS).estimateGas();
+    const burnTx = await ethTokenMessengerContract.methods.depositForBurn(amount, AVAX_DESTINATION_DOMAIN, destinationAddressInBytes32, USDC_OP_CONTRACT_ADDRESS).send({gas: burnTxGas});
     const burnTxReceipt = await waitForTransaction(web3, burnTx.transactionHash);
     console.log('BurnTxReceipt: ', burnTxReceipt)
 
