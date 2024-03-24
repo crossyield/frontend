@@ -1,4 +1,7 @@
 import React from "react";
+import { useVault } from "@/components/ContractInteraction";
+import { useContractRead } from "@thirdweb-dev/react";
+
 
 type StatsProps = {
   title1: string;
@@ -23,6 +26,8 @@ const Stats = ({
   desc2,
   desc3,
 }: StatsProps) => {
+
+
   return (
     <div className="stats stats-vertical lg:stats-horizontal shadow gap-10">
       <div className="stat">
