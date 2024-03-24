@@ -2,13 +2,12 @@
 import React, { useEffect, useState } from "react";
 import Stats from "./components/Stats";
 import { toast } from "react-toastify";
+import { useContractRead, useContractWrite } from "@thirdweb-dev/react";
+import { useVault } from "@/components/ContractInteraction";
 //add hooks here
 
 export default function Repay() {
   const [isRepayModalOpen, setIsRepayModalOpen] = useState(false);
-
-  // example of using toast, can render if-else statements to render toast.success or toast.error
-  const notify = () => toast.success("Repayment Successful!");
 
   return (
     <>
@@ -31,9 +30,6 @@ export default function Repay() {
 
         <div className="gap-4 flex flex-col lg:flex-row">
           {/* add additional components here */}
-          <button className="btn btn-primary" onClick={notify}>
-            Repay
-          </button>
         </div>
       </main>
     </>
