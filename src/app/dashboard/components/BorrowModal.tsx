@@ -2,7 +2,8 @@
 import React, {useState} from "react";
 import { toggleBackgroundBlur } from "../../../lib/utils";
 import { useVault } from "@/components/ContractInteraction";
-import { useContractWrite } from "@thirdweb-dev/react";
+import { useContractWrite, Web3Button } from "@thirdweb-dev/react";
+import { ethers } from "ethers";
 
 type ModalProps = {
   title: string;
@@ -14,27 +15,45 @@ const BorrowModal = ({ title, isOpen, onClose }: ModalProps) => {
 
     const {contract: Vault} = useVault();
 
-    const [borrowValue, setBorrowValue] = useState(0);
+    const [borrowValue, setBorrowValue] = useState("");
     const { 
         mutateAsync: borrowAmount , 
         isLoading: loadingborrowAmount, 
         error: borrowAmountError,
     } = useContractWrite(Vault, "borrow");
-    
-    const handleBorrow = async () => {
-        if(borrowValue > 0) {
-            try {
-                await borrowAmount({args: [borrowValue]});
-                // Optionally, reset depositValue to 0 or handle success
-                setBorrowValue(0);
-                console.log('Borrow successful');
-            } catch (error) {
-                // Handle error
-                console.error('Borrow error:', error);
-            }
-        }
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        // Directly store the string value; conversion will happen before contract interaction
+        setBorrowValue(event.target.value);
     };
 
+    let finalBorrowValue: ethers.BigNumber | undefined;
+    try {
+        // Ensure we only convert when depositValue has a valid number
+        if (borrowValue) {
+            finalBorrowValue = ethers.utils.parseUnits(borrowValue, 6);
+        } else {
+            finalBorrowValue = ethers.BigNumber.from(0);
+        }
+    } catch (error) {
+        console.error("Error in BigNumber conversion:", error);
+        finalBorrowValue = ethers.BigNumber.from(0);
+    }
+
+    const handleBorrow = async () => {
+        const finalBorrowValue = ethers.utils.parseUnits(borrowValue, 6);
+        try {
+            await borrowAmount({
+                args: [
+                    finalBorrowValue, // Correctly formatted BigNumber value
+                ],
+            });
+            console.log("Borrow successful");
+        } catch (error) {
+            console.error("Borrow error:", error);
+        }
+    };
+    
     const handleModalClose = () => {
     onClose();
     toggleBackgroundBlur(false); // Remove blur when modal closes
@@ -53,12 +72,11 @@ const BorrowModal = ({ title, isOpen, onClose }: ModalProps) => {
                 <div className="label">
                     <span className="label-text font-bold">Amount</span>
                 </div>
-                <input
-                    type="number"
-                    placeholder="🪙 0.1"
-                    className="input input-bordered w-full max-w-lg rounded-xl"
-                    value={borrowValue}
-                />
+            <input
+                placeholder="🪙 0.1"
+                className="input input-bordered w-full max-w-lg rounded-xl"
+                onChange={handleChange} // Corrected to "onChange"
+            />
                 <div className="label">
                     <span className="label-text-alt">$0.00</span>
                     <span className="label-text-alt">Balance:</span>
@@ -79,13 +97,14 @@ const BorrowModal = ({ title, isOpen, onClose }: ModalProps) => {
             </div>
 
             <div className="modal-action flex flex-col items-center justify-center my-2 gap-2">
-                <button
+                <Web3Button
                 // add deposit function to the onClick event
-                className="btn btn-primary rounded-xl w-48 hover:bg-white hover:border-white"
-                onClick={handleBorrow}
+                contractAddress={Vault.getAddress() || ""}
+                contractAbi={Vault.abi}
+                action={handleBorrow}
                 >
                 Borrow
-                </button>
+                </Web3Button>
             </div>
             <div className="modal-action flex flex-col items-center justify-center my-2 gap-2">
                 <form method="dialog">
