@@ -63,7 +63,6 @@ const DepositModal = ({ title, isOpen, onClose }: ModalProps) => {
     toggleBackgroundBlur(false); // Remove blur when modal closes
     };
 
-
     return (
     <>
         {isOpen && (
