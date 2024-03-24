@@ -16,6 +16,7 @@ import {
   ThundercoreTestnet,
   OpSepoliaTestnet,
   PolygonZkevmCardonaTestnet,
+  Sepolia
 } from "@thirdweb-dev/chains";
 import Header from "@/components/Header";
 import { Bounce, ToastContainer, toast } from "react-toastify";
@@ -44,6 +45,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThirdwebProvider
           supportedChains={[
+            Sepolia,
             LineaTestnet,
             ScrollSepoliaTestnet,
             PolygonZkevmCardonaTestnet,
