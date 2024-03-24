@@ -41,7 +41,6 @@ const main = async () => {
   const ETH_MESSAGE_TRANSMITTER_CONTRACT_ADDRESS =
     "0x7865fAfC2db2093669d92c0F33AeEF291086BEFD";
 
-  // initialize contracts using address and ABI
   const ethTokenMessengerContract = new web3.eth.Contract(
     tokenMessengerAbi,
     OP_TOKEN_MESSENGER_CONTRACT_ADDRESS,
